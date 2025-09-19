@@ -1,5 +1,3 @@
-"use client"
-
 import { Button } from "@/components/ui/button"
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -8,12 +6,6 @@ import Link from "next/link"
 import { Poppins } from "next/font/google"
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "600", "700"] })
-
-// 入力欄の共通クラス（フォント大/中央寄せ/フォーカスリング）
-const inputCls =
-  "h-12 sm:h-14 w-full rounded-lg bg-[#E3E3E3]/80 border-0 px-4 \
-   text-base sm:text-lg text-[#5B5B5B] placeholder:text-base sm:placeholder:text-lg \
-   focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#18A0FB]/40";
 
 export default function SignupPage() {
   return (
@@ -46,7 +38,7 @@ export default function SignupPage() {
       <main className="flex-1 flex justify-center">
         <div className="w-full max-w-[792px] pt-24 pb-16 px-6 flex justify-center">
           <Card className="w-full bg-white border-none shadow-none">
-          <CardHeader className="text-center mt-16">
+          <CardHeader className="text-center">
             <h1 className="text-[40px] font-semibold text-black">Sign Up</h1>
           </CardHeader>
 
