@@ -30,8 +30,6 @@ a {
   }
 }
 
-
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -88,8 +86,6 @@ a {
   }
 }
 
-
-
 @layer base {
   * {
     @apply border-border;
@@ -104,8 +100,8 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0 1000px #e3e3e3cc inset; /* #E3E3E3 + 0.8 */
-  -webkit-text-fill-color: #5B5B5B;
-  caret-color: #5B5B5B;
+  -webkit-text-fill-color: #5b5b5b;
+  caret-color: #5b5b5b;
   border-radius: 20px; /* 入力欄の角丸と一致 */
   transition: background-color 5000s ease-in-out 0s; /* ちらつき防止 */
 }
