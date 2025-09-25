@@ -1,0 +1,58 @@
+body {
+  background: white;
+
+  overflow-y: hidden;
+}
+.formContainer {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.uifrom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 200px;
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  width: 50px;
+}
+
+.formField input {
+  border: 1px solid grey;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.formField input:focus {
+  outline: none;
+}
+
+.formField label {
+  font-size: 15px;
+  font-weight: 600px;
+  margin-bottom: 3px;
+}
+
+.button {
+  background-color: #4f4fdc;
+  width: 50px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 30px;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: rgb(84, 84, 218);
+}
