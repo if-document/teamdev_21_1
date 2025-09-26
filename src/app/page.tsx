@@ -1,95 +1,114 @@
 import Image from "next/image";
-import styles from "./page.module.css";
+import React from "react";
+import Link from "next/link";
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const posts = Array(9).fill({
+    title: "Post Title",
+    category: "Category",
+    author: "Author",
+    time: "a min ago",
+    description:
+      "text text text text text text text text text text text text text text text text text text text...",
+    thumbnail: "/images/post-thumbnail.jpg",
+  });
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+  return (
+    <div className="min-h-screen bg-gray-50 py-[90px] px-[20px]">
+      {/* Search Bar */}
+      <div className="flex justify-center items-center mb-[90px] gap-x-[20px]">
+        <input
+          type="text"
+          placeholder="Search ..."
+          className="w-full text-[26px] font-medium placeholder-[#000000] px-[65px] py-3 bg-gray-200 border-0 rounded-full focus:outline-none focus:ring-2 focus:ring-[#18A0FB] max-w-[740px] h-[60px]"
+        />
+        <button className="p-2 hover:bg-gray-300 rounded-full transition-colors">
+          <Image
+            src="/images/search-icon.svg"
+            alt="Search Icon"
+            width={30}
+            height={30}
+          />
+        </button>
+      </div>
+
+      {/* Posts Grid */}
+      <div className="max-w-[1580px] mx-auto mb-[70px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[90px] gap-y-[70px]">
+          {posts.map((post, idx) => (
+            <Link
+              key={idx}
+              href="#"
+              className="bg-white rounded-xl border border-gray-400 shadow-sm hover:shadow-md transition-shadow overflow-hidden"
+            >
+              {/* Image */}
+              <div className="w-full h-[300px] relative">
+                <Image
+                  src={post.thumbnail}
+                  alt={`${post.title} Thumbnail`}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+
+              {/* Card Content */}
+              <div className="p-[25px]">
+                <div className="flex justify-between items-center mb-[20px]">
+                  <h3 className="text-[30px] font-bold">{post.title}</h3>
+                  <span className="text-[#18A0FB] text-[18px]">
+                    {post.category}
+                  </span>
+                </div>
+                <div className="flex items-center gap-x-[20px] mb-[10px] text-[16px]">
+                  <span className="text-[#18A0FB]">{post.author}</span>
+                  <span className="text-gray-400">{post.time}</span>
+                </div>
+                <p>{post.description}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      {/* Pagination */}
+      <div className="max-w-6xl mx-auto">
+        <div className="flex items-center justify-between">
+          <button className="flex items-center gap-3">
             <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
+              src="/images/arrow-left.svg"
+              alt="Previous"
               width={20}
               height={20}
             />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+            <span className="font-bold text-[22px]">Previous Page</span>
+          </button>
+
+          <div className="flex items-center gap-x-4">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((page) => (
+              <button
+                key={page}
+                className={`w-10 h-10 rounded-full flex items-center justify-center text-[15px] font-bold transition-colors ${
+                  page === 1
+                    ? "bg-black text-white border border-black"
+                    : "border border-gray-300"
+                }`}
+              >
+                {page}
+              </button>
+            ))}
+          </div>
+
+          <button className="flex items-center gap-3">
+            <span className="font-bold text-[22px]">Next Page</span>
+            <Image
+              src="/images/arrow-right.svg"
+              alt="Next"
+              width={20}
+              height={20}
+            />
+          </button>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
     </div>
   );
 }
