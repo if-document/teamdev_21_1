@@ -3,15 +3,16 @@ import React from "react";
 import Link from "next/link";
 
 export default function Home() {
-  const posts = Array(9).fill({
-    title: "Post Title",
+  const posts = Array.from({ length: 9 }, (_, i) => ({
+    id: i + 1,
+    title: `Post Title ${i + 1}`,
     category: "Category",
     author: "Author",
     time: "a min ago",
     description:
       "text text text text text text text text text text text text text text text text text text text...",
     thumbnail: "/images/post-thumbnail.jpg",
-  });
+  }));
 
   return (
     <div className="min-h-screen bg-gray-50 py-[90px] px-[20px]">
@@ -35,10 +36,10 @@ export default function Home() {
       {/* Posts Grid */}
       <div className="max-w-[1580px] mx-auto mb-[70px]">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[90px] gap-y-[70px]">
-          {posts.map((post, idx) => (
+          {posts.map((post) => (
             <Link
-              key={idx}
-              href="#"
+              key={post.id}
+              href={`/article/${post.id}`}
               className="bg-white rounded-xl border border-gray-400 shadow-sm hover:shadow-md transition-shadow overflow-hidden"
             >
               {/* Image */}
