@@ -23,7 +23,12 @@ export default function Home() {
           placeholder="Search ..."
           className="w-full text-[26px] font-medium placeholder-[#000000] px-[65px] py-3 bg-gray-200 border-0 rounded-full focus:outline-none focus:ring-2 focus:ring-[#18A0FB] max-w-[740px] h-[60px]"
         />
-        <button className="p-2 hover:bg-gray-300 rounded-full transition-colors">
+        <button
+          type="button"
+          className="p-2 hover:bg-gray-300 rounded-full transition-colors"
+          title="Search"
+          aria-label="Search"
+        >
           <Image
             src="/images/search-icon.svg"
             alt="Search Icon"
