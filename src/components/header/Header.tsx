@@ -6,31 +6,14 @@ import Link from "next/link";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  // 認証機能ができたら消す
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   return (
-    <>
-      <header className="bg-[#D9D9D9]">
-        {/* 未認証 */}
-        <div className="max-w-[2055px] mx-auto py-[30px] px-[30px]">
-          <div className="flex justify-end items-center gap-x-[50px]">
-            <Link
-              className="flex justify-center items-center flex-col text-[25px] font-bold text-black border border-black w-[200px] rounded-full h-[60px] hover:opacity-70 transition duration-200 ease-in-out"
-              href="/login"
-            >
-              Login
-            </Link>
-            <Link
-              className="flex justify-center items-center flex-col text-[25px] font-bold text-white border border-black w-[200px] rounded-full h-[60px] bg-[#383838] hover:opacity-70 transition duration-200 ease-in-out"
-              href="/signup"
-            >
-              Signup
-            </Link>
-          </div>
-        </div>
-      </header>
-      <header className="bg-[#D9D9D9] mt-[50px]">
-        {/* 認証済 */}
-        <div className="max-w-[2055px] mx-auto py-[30px] px-[30px]">
+    <header className="bg-[#D9D9D9]">
+      <div className="max-w-[2055px] mx-auto py-[30px] px-[30px]">
+        {isAuthenticated ? (
+          // 認証済
           <div className="flex justify-end items-center gap-x-[50px]">
             <Link
               className="flex justify-center items-center flex-col text-[25px] font-bold text-white border border-black w-[180px] rounded-full h-[60px] bg-[#383838] hover:opacity-70 transition duration-200 ease-in-out"
@@ -64,8 +47,24 @@ export default function Header() {
               )}
             </div>
           </div>
-        </div>
-      </header>
-    </>
+        ) : (
+          // 未認証
+          <div className="flex justify-end items-center gap-x-[50px]">
+            <Link
+              className="flex justify-center items-center flex-col text-[25px] font-bold text-black border border-black w-[200px] rounded-full h-[60px] hover:opacity-70 transition duration-200 ease-in-out"
+              href="/login"
+            >
+              Login
+            </Link>
+            <Link
+              className="flex justify-center items-center flex-col text-[25px] font-bold text-white border border-black w-[200px] rounded-full h-[60px] bg-[#383838] hover:opacity-70 transition duration-200 ease-in-out"
+              href="/signup"
+            >
+              Signup
+            </Link>
+          </div>
+        )}
+      </div>
+    </header>
   );
 }
