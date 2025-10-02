@@ -1,13 +1,13 @@
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardHeader,
   CardContent,
   CardFooter,
+  CardHeader,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import Link from "next/link";
 
 export default function SignupPage() {
   return (
@@ -64,7 +64,7 @@ export default function SignupPage() {
               </div>
 
               {/* Email */}
-              <div className="space-y-2">
+              <div className="space-y-2 text-left">
                 <Label
                   htmlFor="email"
                   className="text-[26px] font-normal text-black"
