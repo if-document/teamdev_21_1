@@ -1,12 +1,10 @@
 // src/app/profile/[id]/page.tsx
 "use client";
 
-import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { User } from "lucide-react";
+import * as React from "react";
 
 type Post = {
   id: string;
@@ -30,7 +28,6 @@ const POSTS_PER_PAGE = 6;
 
 export default function ProfilePage() {
   const _params = useParams<{ id: string }>();
-  const [menuOpen, setMenuOpen] = React.useState(false);
   const [page, setPage] = React.useState(1);
 
   const totalPages = Math.max(1, Math.ceil(MOCK_POSTS.length / POSTS_PER_PAGE));
@@ -41,43 +38,6 @@ export default function ProfilePage() {
 
   return (
     <div className="min-h-screen bg-white text-black flex flex-col">
-      {/* Header */}
-      <header className="h-[120px] w-full bg-[#E0E0E0] flex items-center justify-end px-8 relative">
-        <Link href="/article/create" className="mr-4">
-          <Button className="w-[180px] h-[60px] rounded-full bg-[#2F2F2F] text-white text-xl hover:bg-[#232323]">
-            Create
-          </Button>
-        </Link>
-
-        <div className="relative">
-          <button
-            aria-label="Open user menu"
-            onClick={() => setMenuOpen((v) => !v)}
-            className="w-20 h-20 rounded-full bg-gray-300 flex items-center justify-center hover:bg-gray-300/80"
-          >
-            <User className="w-8 h-8 text-black" />
-          </button>
-
-          {menuOpen && (
-            <div className="absolute right-0 top-[92px] w-[262px] rounded-[20px] bg-[#B3B3B3] p-4 shadow-lg">
-              <div className="text-center text-[26px] font-semibold text-black">
-                User name
-              </div>
-              <div className="mt-4 flex justify-center">
-                <Button
-                  className="w-[203px] h-[50px] rounded-full bg-[rgba(255,49,49,0.56)] hover:bg-[rgba(255,49,49,0.7)] text-black text-[24px] font-semibold"
-                  onClick={() => {
-                    window.location.href = "/login";
-                  }}
-                >
-                  Logout
-                </Button>
-              </div>
-            </div>
-          )}
-        </div>
-      </header>
-
       {/* Main */}
       <main className="flex-1 mb-10">
         <h1 className="text-center text-[60px] font-semibold text-[#6B6B6B] mt-10">
