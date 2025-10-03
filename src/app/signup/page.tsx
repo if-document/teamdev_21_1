@@ -64,7 +64,7 @@ export default function SignupPage() {
               </div>
 
               {/* Email */}
-              <div className="space-y-2 text-left">
+              <div className="space-y-2">
                 <Label
                   htmlFor="email"
                   className="text-[26px] font-normal text-black"
