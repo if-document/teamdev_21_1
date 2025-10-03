@@ -1,21 +1,24 @@
 import Image from "next/image";
-import React from "react";
 import Link from "next/link";
+import { Pagination } from "@/components/pagination/Pagination";
+import { postsData } from "@/lib/sampleData";
 
-export default function Home() {
-  const posts = Array.from({ length: 9 }, (_, i) => ({
-    id: i + 1,
-    title: `Post Title ${i + 1}`,
-    category: "Category",
-    author: "Author",
-    time: "a min ago",
-    description:
-      "text text text text text text text text text text text text text text text text text text text...",
-    thumbnail: "/images/post-thumbnail.jpg",
-  }));
+export default function Home({
+  searchParams,
+}: {
+  searchParams?: {
+    page?: string;
+  };
+}) {
+  const currentPage = Number(searchParams?.page) || 1;
+  const postsPerPage = 9;
+  const totalPosts = postsData.length;
+  const startPost = (currentPage - 1) * postsPerPage;
+  const endPost = startPost + postsPerPage;
+  const paginatedPosts = postsData.slice(startPost, endPost);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-[90px] px-[20px]">
+    <div className="min-h-screen bg-gray-50 pt-[90px] px-[20px] pb-[25px]">
       {/* Search Bar */}
       <div className="flex justify-center items-center mb-[90px] gap-x-[20px]">
         <input
@@ -39,9 +42,9 @@ export default function Home() {
       </div>
 
       {/* Posts Grid */}
-      <div className="max-w-[1580px] mx-auto mb-[70px]">
+      <div className="max-w-[1580px] mx-auto mb-[25px]">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[90px] gap-y-[70px]">
-          {posts.map((post) => (
+          {paginatedPosts.map((post) => (
             <Link
               key={post.id}
               href={`/article/${post.id}`}
@@ -50,7 +53,7 @@ export default function Home() {
               {/* Image */}
               <div className="w-full h-[300px] relative">
                 <Image
-                  src={post.thumbnail}
+                  src={post.articleImageUrl}
                   alt={`${post.title} Thumbnail`}
                   fill
                   className="object-cover"
@@ -66,10 +69,10 @@ export default function Home() {
                   </span>
                 </div>
                 <div className="flex items-center gap-x-[20px] mb-[10px] text-[16px]">
-                  <span className="text-[#18A0FB]">{post.author}</span>
+                  <span className="text-[#18A0FB]">{post.author.name}</span>
                   <span className="text-gray-400">{post.time}</span>
                 </div>
-                <p>{post.description}</p>
+                <p>{post.content}</p>
               </div>
             </Link>
           ))}
@@ -77,44 +80,7 @@ export default function Home() {
       </div>
 
       {/* Pagination */}
-      <div className="max-w-6xl mx-auto">
-        <div className="flex items-center justify-between">
-          <button className="flex items-center gap-3">
-            <Image
-              src="/images/arrow-left.svg"
-              alt="Previous"
-              width={20}
-              height={20}
-            />
-            <span className="font-bold text-[22px]">Previous Page</span>
-          </button>
-
-          <div className="flex items-center gap-x-4">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((page) => (
-              <button
-                key={page}
-                className={`w-10 h-10 rounded-full flex items-center justify-center text-[15px] font-bold transition-colors ${
-                  page === 1
-                    ? "bg-black text-white border border-black"
-                    : "border border-gray-300"
-                }`}
-              >
-                {page}
-              </button>
-            ))}
-          </div>
-
-          <button className="flex items-center gap-3">
-            <span className="font-bold text-[22px]">Next Page</span>
-            <Image
-              src="/images/arrow-right.svg"
-              alt="Next"
-              width={20}
-              height={20}
-            />
-          </button>
-        </div>
-      </div>
+      <Pagination totalPages={Math.ceil(totalPosts / postsPerPage)} />
     </div>
   );
 }
