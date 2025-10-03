@@ -79,7 +79,7 @@ export default function ProfilePage() {
       </header>
 
       {/* Main */}
-      <main className="flex-1">
+      <main className="flex-1 mb-10">
         <h1 className="text-center text-[60px] font-semibold text-[#6B6B6B] mt-10">
           Your Post
         </h1>
@@ -193,8 +193,6 @@ export default function ProfilePage() {
             </button>
           </div>
         </section>
-
-        <div className="h-10" />
       </main>
     </div>
   );
