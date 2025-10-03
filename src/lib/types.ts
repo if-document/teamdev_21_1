@@ -3,15 +3,18 @@ export type Article = {
   title: string;
   content: string;
   category: string;
-  authorAvatarUrl: string | null;
-  authorName: string;
   articleImageUrl: string;
+  time: string;
+  authorName: string;
+  authorAvatarUrl: string | null;
 };
 
 export type Comment = {
   id: number;
-  userName: string;
-  userAvatarUrl: string | null;
   content: string;
   time: string;
+  userName: string;
+  userAvatarUrl: string | null;
 };
+
+export type PageNumber = number | "ellipsisLeft" | "ellipsisRight";

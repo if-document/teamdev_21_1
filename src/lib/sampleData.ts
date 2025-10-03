@@ -5,27 +5,43 @@ export const articleData: Article = {
   title: "Blog Title",
   content:
     "これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。\n\nこれはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。",
-  category: "Sample Category",
-  authorAvatarUrl: null,
-  authorName: "Author",
+  category: "Category",
   articleImageUrl: "",
+  time: "a min ago",
+  authorName: "Author",
+  authorAvatarUrl: null,
 };
+
+export const postsData: Article[] = Array.from(
+  { length: 120 },
+  (_, i) => ({
+    id: i + 1,
+    title: `Post Title ${i + 1}`,
+    content:
+      "text text text text text text text text text text text text text text text text text text text...",
+    category: "Category",
+    articleImageUrl: "/images/post-thumbnail.jpg",
+    time: "a min ago",
+    authorName: "Author",
+    authorAvatarUrl: null,
+  }),
+);
 
 export const commentListData: Comment[] = [
   {
     id: 1,
-    userName: "user",
-    userAvatarUrl: null,
     content:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ligula nibh, interdum non enim sit amet, iaculis aliquet nunc.",
     time: "a min ago",
+    userName: "user",
+    userAvatarUrl: null,
   },
   {
     id: 2,
-    userName: "user",
-    userAvatarUrl: null,
     content:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ligula nibh, interdum non enim sit amet, iaculis aliquet nunc.",
     time: "a min ago",
+    userName: "user",
+    userAvatarUrl: null,
   },
 ];
