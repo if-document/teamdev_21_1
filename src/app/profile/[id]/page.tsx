@@ -3,38 +3,20 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+// import { useParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import * as React from "react";
-
-type Post = {
-  id: string;
-  title: string;
-  category: string;
-  author: { id: string; name: string };
-  createdAt: string;
-  thumbnail?: string;
-};
-
-const MOCK_POSTS: Post[] = Array.from({ length: 18 }).map((_, i) => ({
-  id: `${i + 1}`,
-  title: "Post Title",
-  category: "Category",
-  author: { id: "42", name: "Author" },
-  createdAt: new Date(Date.now() - i * 60_000).toISOString(),
-  thumbnail: "/images/post-thumbnail.jpg",
-}));
-
-const POSTS_PER_PAGE = 6;
+import { Pagination } from "@/components/pagination/Pagination";
+import { postsData } from "@/lib/sampleData";
 
 export default function ProfilePage() {
-  const _params = useParams<{ id: string }>();
-  const [page, setPage] = React.useState(1);
-
-  const totalPages = Math.max(1, Math.ceil(MOCK_POSTS.length / POSTS_PER_PAGE));
-  const pagedPosts = React.useMemo(() => {
-    const start = (page - 1) * POSTS_PER_PAGE;
-    return MOCK_POSTS.slice(start, start + POSTS_PER_PAGE);
-  }, [page]);
+  const searchParams = useSearchParams();
+  const currentPage = Number(searchParams?.get("page")) || 1;
+  const postsPerPage = 6;
+  const totalPosts = postsData.length;
+  const startPost = (currentPage - 1) * postsPerPage;
+  const endPost = startPost + postsPerPage;
+  const paginatedPosts = postsData.slice(startPost, endPost);
 
   return (
     <div className="min-h-screen bg-white text-black flex flex-col">
@@ -47,7 +29,7 @@ export default function ProfilePage() {
         {/* Cards */}
         <section className="max-w-[1580px] mx-auto mt-[40px] mb-[70px] px-[20px]">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[90px] gap-y-[70px]">
-            {pagedPosts.map((post) => (
+            {paginatedPosts.map((post) => (
               <article
                 key={post.id}
                 className="bg-white rounded-xl border border-gray-400 shadow-sm hover:shadow-md transition-shadow overflow-hidden"
@@ -57,9 +39,9 @@ export default function ProfilePage() {
                   href={`/article/${post.id}`}
                   className="block relative w-full h-[300px] bg-[#D8DDE5]"
                 >
-                  {post.thumbnail && (
+                  {post.articleImageUrl && (
                     <Image
-                      src={post.thumbnail}
+                      src={post.articleImageUrl}
                       alt={`${post.title} Thumbnail`}
                       fill
                       className="object-cover"
@@ -101,58 +83,8 @@ export default function ProfilePage() {
           </div>
         </section>
 
-        {/* Pagination（Home と同じ見た目） */}
-        <section className="max-w-6xl mx-auto px-6">
-          <div className="flex items-center justify-between">
-            <button
-              className="flex items-center gap-3 disabled:opacity-40"
-              onClick={() => setPage((p) => Math.max(1, p - 1))}
-              disabled={page === 1}
-            >
-              <Image
-                src="/images/arrow-left.svg"
-                alt="Previous"
-                width={20}
-                height={20}
-              />
-              <span className="font-bold text-[22px]">Previous Page</span>
-            </button>
-
-            <div className="flex items-center gap-x-4">
-              {Array.from({ length: totalPages }).map((_, i) => {
-                const n = i + 1;
-                const active = n === page;
-                return (
-                  <button
-                    key={n}
-                    onClick={() => setPage(n)}
-                    className={`w-10 h-10 rounded-full flex items-center justify-center text-[15px] font-bold transition-colors ${
-                      active
-                        ? "bg-black text-white border border-black"
-                        : "border border-gray-300"
-                    }`}
-                  >
-                    {n}
-                  </button>
-                );
-              })}
-            </div>
-
-            <button
-              className="flex items-center gap-3 disabled:opacity-40"
-              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-              disabled={page === totalPages}
-            >
-              <span className="font-bold text-[22px]">Next Page</span>
-              <Image
-                src="/images/arrow-right.svg"
-                alt="Next"
-                width={20}
-                height={20}
-              />
-            </button>
-          </div>
-        </section>
+        {/* Pagination */}
+        <Pagination totalPages={Math.ceil(totalPosts / postsPerPage)} />
       </main>
     </div>
   );
