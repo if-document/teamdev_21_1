@@ -1,3 +1,9 @@
+export type User = {
+  id: number;
+  name: string;
+  avatarUrl: string | null;
+};
+
 export type Article = {
   id: number;
   title: string;
@@ -5,16 +11,14 @@ export type Article = {
   category: string;
   articleImageUrl: string;
   time: string;
-  authorName: string;
-  authorAvatarUrl: string | null;
+  author: User;
 };
 
 export type Comment = {
   id: number;
   content: string;
   time: string;
-  userName: string;
-  userAvatarUrl: string | null;
+  user: User;
 };
 
 export type PageNumber = number | "ellipsisLeft" | "ellipsisRight";

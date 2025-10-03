@@ -29,8 +29,8 @@ export function CommentSection({ comments }: { comments: Comment[] }) {
               <div className="flex flex-col items-center">
                 <Avatar className="w-[74px] h-[74px]">
                   <AvatarImage
-                    src={comment.userAvatarUrl ?? undefined}
-                    alt={comment.userName}
+                    src={comment.user.avatarUrl ?? undefined}
+                    alt={comment.user.name}
                   />
                   <AvatarFallback>
                     <Image
@@ -41,7 +41,7 @@ export function CommentSection({ comments }: { comments: Comment[] }) {
                     />
                   </AvatarFallback>
                 </Avatar>
-                <p className="text-lg">{comment.userName}</p>
+                <p className="text-lg">{comment.user.name}</p>
               </div>
               <div className="flex flex-col h-full">
                 <p className="text-lg leading-relaxed mt-2 mb-2">
