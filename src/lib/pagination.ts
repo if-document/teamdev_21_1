@@ -15,7 +15,7 @@ const pageRange = (start: number, end: number): number[] =>
 export const getPageNumbers = (
   currentPage: number,
   totalPages: number,
-  maxDisplay: number = 11,
+  maxDisplay: number = 10,
 ): PageNumber[] => {
   const halfDisplayRange = Math.ceil(maxDisplay / 2);
   const middlePageCount = maxDisplay - 4; // 先頭(1)と末尾(totalPages)、省略記号2つ分を除いた残り
