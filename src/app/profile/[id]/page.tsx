@@ -3,20 +3,20 @@
 
 import Image from "next/image";
 import Link from "next/link";
-// import { useParams } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import * as React from "react";
 import { Pagination } from "@/components/pagination/Pagination";
+import { usePaginatedPosts } from "@/hooks/usePaginatedPosts";
 import { postsData } from "@/lib/sampleData";
 
 export default function ProfilePage() {
   const searchParams = useSearchParams();
   const currentPage = Number(searchParams?.get("page")) || 1;
-  const postsPerPage = 6;
-  const totalPosts = postsData.length;
-  const startPost = (currentPage - 1) * postsPerPage;
-  const endPost = startPost + postsPerPage;
-  const paginatedPosts = postsData.slice(startPost, endPost);
+  const { paginatedPosts, totalPages } = usePaginatedPosts(
+    postsData,
+    currentPage,
+    6,
+  );
 
   return (
     <div className="min-h-screen bg-white text-black flex flex-col">
@@ -84,7 +84,7 @@ export default function ProfilePage() {
         </section>
 
         {/* Pagination */}
-        <Pagination totalPages={Math.ceil(totalPosts / postsPerPage)} />
+        <Pagination totalPages={totalPages} />
       </main>
     </div>
   );

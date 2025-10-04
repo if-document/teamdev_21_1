@@ -1,21 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Pagination } from "@/components/pagination/Pagination";
+import { usePaginatedPosts } from "@/hooks/usePaginatedPosts";
 import { postsData } from "@/lib/sampleData";
 
 export default function Home({
   searchParams,
 }: {
-  searchParams?: {
-    page?: string;
-  };
+  searchParams?: { page?: string };
 }) {
   const currentPage = Number(searchParams?.page) || 1;
-  const postsPerPage = 9;
-  const totalPosts = postsData.length;
-  const startPost = (currentPage - 1) * postsPerPage;
-  const endPost = startPost + postsPerPage;
-  const paginatedPosts = postsData.slice(startPost, endPost);
+  const { paginatedPosts, totalPages } = usePaginatedPosts(
+    postsData,
+    currentPage,
+    9,
+  );
 
   return (
     <div className="min-h-screen bg-gray-50 pt-[90px] px-[20px] pb-[25px]">
@@ -80,7 +79,7 @@ export default function Home({
       </div>
 
       {/* Pagination */}
-      <Pagination totalPages={Math.ceil(totalPosts / postsPerPage)} />
+      <Pagination totalPages={totalPages} />
     </div>
   );
 }
