@@ -6,34 +6,11 @@ import { Button } from "@/components/ui/button";
 export default function Login() {
   return (
     <div className="formContainer">
-      <header className="bg-stone-300 w-full p-5 mr-5 text-right">
-        <div className="px-6 mx-auto max-w-[1200px] h-20 flex items-center justify-end gap-3 ">
-          <Link href="/login">
-            <Button
-              className="h-12 px-8 rounded-full border border-black
-                         bg-[#D9D9D9] text-black text-lg font-bold
-                         hover:bg-[#383838] hover:text-white "
-            >
-              Login
-            </Button>
-          </Link>
-          <Link href="/signUp">
-            <Button
-              className="h-12 px-8 rounded-full border border-black
-                         bg-[#1f1c1c] text-white text-lg font-bold
-                         hover:bg-[#686262] hover:text-white"
-            >
-              sign Up
-            </Button>
-          </Link>
-        </div>
-      </header>
-
-      <main className="items-center flex-1 flex  flex-col pt-52 w-full  ">
+      <main className="items-center flex-1 flex  flex-col w-full">
         <form className="formfield  ">
           <div className=" divide-y pt-24  max-w-[792px]  pb-16 px-6 ">
             <h1 className="text-black text-5xl flex  flex-col font-bold items-center">
-              sign in
+              Login
               <hr className=" mt-6 w-1/3 border-black border-2 flex  flex-col  items-center" />
             </h1>
           </div>
@@ -69,7 +46,7 @@ export default function Login() {
               Don't have an account ?
               <Link href="/login" className="text-[#18A0FB] font-semibold">
                 {" "}
-                signUp
+                SignUp
               </Link>
             </p>
           </div>

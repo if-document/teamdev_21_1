@@ -12,31 +12,6 @@ import Link from "next/link";
 export default function SignupPage() {
   return (
     <div className="min-h-screen bg-white flex flex-col font-sans">
-      {/* Navbar */}
-      <nav className="w-full bg-[#D9D9D9]">
-        <div className="mx-auto max-w-[1200px] h-20 flex items-center justify-end gap-3 px-6">
-          <Link href="/login">
-            <Button
-              className="h-12 px-8 rounded-full border border-black
-                         bg-[#D9D9D9] text-black text-lg font-bold
-                         hover:bg-[#383838] hover:text-white"
-            >
-              Login
-            </Button>
-          </Link>
-          <Link href="/signup">
-            <Button
-              className="h-12 px-8 rounded-full border border-black
-                         bg-[#D9D9D9] text-black text-lg font-bold
-                         hover:bg-[#383838] hover:text-white"
-            >
-              Sign Up
-            </Button>
-          </Link>
-        </div>
-      </nav>
-
-      {/* Main */}
       <main className="flex-1 flex justify-center">
         <div className="w-full max-w-[792px] pt-24 pb-16 px-6 flex justify-center">
           <Card className="w-full bg-white border-none shadow-none">
