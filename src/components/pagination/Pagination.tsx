@@ -50,7 +50,7 @@ export const Pagination = ({ totalPages }: Props) => {
                 src="/images/arrow-left.svg"
                 alt="Previous"
                 width={20}
-                height={20}
+                height={21}
               />
               <span className="font-bold text-[22px]">Previous Page</span>
             </PaginationLink>
@@ -95,7 +95,7 @@ export const Pagination = ({ totalPages }: Props) => {
                 src="/images/arrow-right.svg"
                 alt="Next"
                 width={20}
-                height={20}
+                height={21}
               />
             </PaginationLink>
           </PaginationItem>
