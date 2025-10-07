@@ -1,17 +1,24 @@
+export type User = {
+  id: number;
+  name: string;
+  avatarUrl: string | null;
+};
+
 export type Article = {
   id: number;
   title: string;
   content: string;
   category: string;
-  authorAvatarUrl: string | null;
-  authorName: string;
   articleImageUrl: string;
+  time: string;
+  author: User;
 };
 
 export type Comment = {
   id: number;
-  userName: string;
-  userAvatarUrl: string | null;
   content: string;
   time: string;
+  user: User;
 };
+
+export type PageNumber = number | "ellipsisLeft" | "ellipsisRight";
