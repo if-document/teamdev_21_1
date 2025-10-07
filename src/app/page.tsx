@@ -4,12 +4,13 @@ import { Pagination } from "@/components/pagination/Pagination";
 import { usePaginatedPosts } from "@/hooks/usePaginatedPosts";
 import { postsData } from "@/lib/sampleData";
 
-export default function Home({
+export default async function Home({
   searchParams,
 }: {
-  searchParams?: { page?: string };
+  searchParams?: Promise<{ page?: string }>;
 }) {
-  const currentPage = Number(searchParams?.page) || 1;
+  const params = await searchParams;
+  const currentPage = Number(params?.page) || 1;
   const { paginatedPosts, totalPages } = usePaginatedPosts(
     postsData,
     currentPage,
