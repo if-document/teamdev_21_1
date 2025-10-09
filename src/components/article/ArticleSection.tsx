@@ -3,7 +3,19 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
 import { Article } from "@/lib/types";
 
+const isValidUrl = (url: string): boolean => {
+  if (!url) return false;
+  try {
+    new URL(url);
+    return true;
+  } catch {
+    return false;
+  }
+};
+
 export function ArticleSection({ article }: { article: Article }) {
+  const hasValidImage = isValidUrl(article.articleImageUrl);
+
   return (
     <section className="p-4 mb-8">
       <Card className="max-w-[1320px] mx-auto bg-stone-100 rounded-2xl pt-[25px] px-[60px] pb-[50px] shadow-none">
@@ -33,7 +45,7 @@ export function ArticleSection({ article }: { article: Article }) {
             </div>
           </header>
           <div className="relative w-full mx-auto aspect-[2/1] bg-stone-300 flex items-center justify-center mb-12 overflow-hidden">
-            {article.articleImageUrl ? (
+            {hasValidImage ? (
               <Image
                 src={article.articleImageUrl}
                 alt="Article image"
