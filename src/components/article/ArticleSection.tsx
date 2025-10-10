@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
-import { Article } from "@/lib/types";
+import type { Article } from "@/types/types";
 
 export function ArticleSection({ article }: { article: Article }) {
   return (
