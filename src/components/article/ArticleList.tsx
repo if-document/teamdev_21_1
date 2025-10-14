@@ -14,6 +14,8 @@ export type PostRecord = {
   title: string;
   updated_at: string;
   user_id: string;
+  users: { name: string };
+  categories: { name: string };
 };
 
 /**
@@ -28,7 +30,7 @@ export async function ArticleList(
 ): Promise<PostRecord[]> {
   let query = supabase
     .from("posts")
-    .select("*")
+    .select("*, users (name), categories (name)")
     .order("created_at", { ascending: false });
   // created_at が新しい順 (降順)
 
