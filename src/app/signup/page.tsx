@@ -1,15 +1,25 @@
+"use client";
+
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardHeader,
   CardContent,
   CardFooter,
+  CardHeader,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import Link from "next/link";
+import { supabase } from "@/lib/supabaseClient";
 
 export default function SignupPage() {
+  const handleSignup = async () => {
+    const { data, error } = await supabase.auth.signUp({
+      email: "example@email.com",
+      password: "example-password",
+    });
+  };
+
   return (
     <div className="min-h-screen bg-white flex flex-col font-sans">
       <main className="flex-1 flex justify-center">
@@ -81,6 +91,7 @@ export default function SignupPage() {
               <Button
                 type="button"
                 className="h-14 w-48 rounded-full bg-[#18A0FB] text-white text-lg font-semibold"
+                onClick={handleSignup}
               >
                 Sign Up
               </Button>
