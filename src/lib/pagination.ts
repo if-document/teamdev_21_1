@@ -1,4 +1,4 @@
-import { PageNumber } from "@/lib/types";
+import type { PageNumber } from "@/types/types";
 
 /**
  * 指定範囲のページ番号を配列で返す

@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
-import { Comment } from "@/lib/types";
+import type { Comment } from "@/types/types";
 
 export function CommentSection({ comments }: { comments: Comment[] }) {
   return (

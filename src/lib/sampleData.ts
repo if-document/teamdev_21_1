@@ -1,4 +1,4 @@
-import { Article, Comment, User } from "@/lib/types";
+import type { Article, Comment, User } from "@/types/types";
 
 const authorData: User = {
   id: 1,
