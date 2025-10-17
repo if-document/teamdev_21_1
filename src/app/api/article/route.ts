@@ -26,7 +26,9 @@ export async function getArticleForEdit(
     console.error("記事のフェッチエラー (getArticleForEdit):", articleError);
     // 記事が存在しないか、権限がない場合、SupabaseはPGRST116エラーを返す
     if (articleError.code === "PGRST116") {
-      throw new Error("編集対象の記事が見つからないか、編集する権限がありません。");
+      throw new Error(
+        "編集対象の記事が見つからないか、編集する権限がありません。",
+      );
     }
     throw new Error("記事の取得に失敗しました。");
   }
