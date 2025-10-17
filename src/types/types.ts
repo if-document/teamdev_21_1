@@ -1,17 +1,22 @@
-export type User = {
-  id: number;
-  name: string;
-  avatarUrl: string | null;
-};
-
 export type Article = {
   id: number;
   title: string;
   content: string;
-  category: string;
+  category: Category;
   articleImageUrl: string;
   time: string;
   author: User;
+};
+
+export type Category = {
+  id: number;
+  name: string;
+};
+
+export type User = {
+  id: string;
+  name: string;
+  avatarUrl: string | null;
 };
 
 export type Comment = {
