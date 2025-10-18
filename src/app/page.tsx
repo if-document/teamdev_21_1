@@ -83,7 +83,8 @@ export default function Home() {
                 <Image
                   src={post.image_path}
                   alt={`${post.title} Thumb Nail`}
-                  fill
+                  width={500}
+                  height={500}
                   className="object-cover"
                 />
               </div>
