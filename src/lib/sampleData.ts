@@ -1,13 +1,13 @@
 import type { Article, Comment, User } from "@/types/types";
 
 const authorData: User = {
-  id: 1,
+  id: "1",
   name: "Author",
   avatarUrl: null,
 };
 
 const userData: User = {
-  id: 1,
+  id: "1",
   name: "User",
   avatarUrl: null,
 };
@@ -16,8 +16,8 @@ export const articleData: Article = {
   id: 1,
   title: "Blog Title",
   content:
-    "これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。\n\nこれはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。",
-  category: "Category",
+    "これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。これはサンプルの文章です。",
+  category: { id: 1, name: "Category" },
   articleImageUrl: "",
   time: "a min ago",
   author: authorData,
@@ -28,7 +28,7 @@ export const postsData: Article[] = Array.from({ length: 120 }, (_, i) => ({
   title: `Post Title ${i + 1}`,
   content:
     "text text text text text text text text text text text text text text text text text text text...",
-  category: "Category",
+  category: { id: 1, name: "Category" },
   articleImageUrl: "/images/post-thumbnail.jpg",
   time: "a min ago",
   author: authorData,

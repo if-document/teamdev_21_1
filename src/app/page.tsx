@@ -65,7 +65,7 @@ export default async function Home({
                 <div className="flex justify-between items-center mb-[20px]">
                   <h3 className="text-[30px] font-bold">{post.title}</h3>
                   <span className="text-[#18A0FB] text-[18px]">
-                    {post.category}
+                    {post.category.name}
                   </span>
                 </div>
                 <div className="flex items-center gap-x-[20px] mb-[10px] text-[16px]">
