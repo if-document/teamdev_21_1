@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Article } from "@/lib/types";
 
 const isValidUrl = (url: string): boolean => {
@@ -30,8 +30,8 @@ export function ArticleSection({ article }: { article: Article }) {
             <div className="flex-shrink-0">
               <Avatar className="w-[96px] h-[96px]">
                 <AvatarImage
-                  src={article.author.avatarUrl ?? undefined}
-                  alt={article.author.name}
+                  src={article.authorAvatarUrl ?? undefined}
+                  alt={article.authorName}
                 />
                 <AvatarFallback>
                   <Image
