@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { useCallback, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -10,6 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { deletePost } from "@/lib/posts";
 
 export default function ArticleEditPage() {
   // dummy data
@@ -17,10 +19,32 @@ export default function ArticleEditPage() {
     "We can come through this trying time stronger, and with a renewed sense of purpose and respect for one another. The pandemic has shown us that it is not only our troops who are willing to offer the ultimate sacrifice for the safety of the community. Americans in hospitals, grocery stores, post offices, and elsewhere have put their lives on the line in order to serve their fellow citizens and their country. We know that we are better than the abuse of executive authority that we witnessed in Lafayette Square. We must reject and hold accountable those in office who would make a mockery of our Constitution. At the same time, we must remember Lincoln's better angels, and listen to them, as we work to unite.",
   );
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Content:", content);
-  };
+  const router = useRouter();
+  const params = useParams();
+  const currentId = Number(params.id);
+
+  const handleDelete = useCallback(async () => {
+    console.log(`<Delete ${currentId}>`);
+
+    if (!currentId) {
+      console.log("Error: invalid ID.");
+      return;
+    }
+
+    if (!confirm("Delete current article ?")) {
+      console.log("Delete Canceled.");
+      return;
+    }
+
+    try {
+      await deletePost(currentId);
+      console.log("delete completed.");
+      router.push("/"); // ホームページへ復帰する
+    } catch (err) {
+      console.log("Error: invalid ID.");
+      console.error(err);
+    }
+  }, [currentId, router]);
 
   return (
     <div className="w-full max-w-[1492px] mx-auto px-[16px]">
@@ -91,12 +115,19 @@ export default function ArticleEditPage() {
           className="bg-[#F5F5F5] text-[#555] border-0 rounded-[clamp(16px,2.8vw,40px)] [aspect-ratio:73/30] p-[0.5em] md:p-[1em] text-[clamp(18px,1.8vw,26px)] md:text-[clamp(18px,1.8vw,26px)] min-h-[14em] mt-[1em] mb-[2em] placeholder:text-[#888] focus-visible:outline-none focus-visible:ring-offset-0 focus-visible:ring-1 focus-visible:bg-[#fff] shadow-md md:shadow-lg"
         />
 
-        <div className="flex justify-center md:justify-end my-[2em]">
+        <div className="flex justify-center md:justify-end my-[2em] gap-[0.5em]">
           <Button
             type="submit"
             className="px-[4em] py-[1.3em] bg-[#18A0FB] text-[#fff] text-[clamp(16px,1.5vw,22px)] font-bold"
           >
             Create
+          </Button>
+          <Button
+            type="button"
+            onClick={handleDelete}
+            className="px-[4em] py-[1.3em] bg-[#18A0FB] text-[#fff] text-[clamp(16px,1.5vw,22px)] font-bold"
+          >
+            Delete
           </Button>
         </div>
       </form>
