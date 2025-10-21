@@ -1,47 +1,12 @@
 import { extractPathFromUrl } from "@/lib/helpers";
-import { createClient } from "@/lib/supabase/client";
+import { supabase } from "@/lib/supabaseClient";
 import type {
   ArticleUpdateData,
   FormattedArticleUpdateData,
 } from "@/lib/validation/article";
-import {
-  articleDisplaySchema,
-  articleFetchSchema,
-  formattedArticleUpdateSchema,
-} from "@/lib/validation/article";
-import type { Article } from "@/types/types";
+import { formattedArticleUpdateSchema } from "@/lib/validation/article";
 
-const supabase = createClient();
 const bucketName = "post-image";
-
-export async function getArticleById(id: number): Promise<Article | null> {
-  try {
-    const { data, error } = await supabase
-      .from("posts")
-      .select(`
-        *,
-        author:users(*),
-        category:categories(*)
-      `)
-      .eq("id", id)
-      .single();
-
-    if (error) {
-      if (error.code !== "PGRST116") {
-        console.error("Error fetching article:", error);
-      }
-      return null;
-    }
-
-    // Zodスキーマでデータの検証と変換を行う
-    const fetchedArticle = articleFetchSchema.parse(data);
-    const article = articleDisplaySchema.parse(fetchedArticle);
-    return article;
-  } catch (error) {
-    console.error("Error fetching article:", error);
-    return null;
-  }
-}
 
 // 記事IDに基づいて記事更新を行う
 export async function updateArticle(
@@ -93,7 +58,7 @@ export async function updateArticle(
     .update({
       ...formattedData,
       image_path: newImageUrl,
-      updated_at: new Date(),
+      updated_at: new Date().toISOString(),
     })
     .eq("id", articleId)
     .eq("user_id", userId);
