@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 
-export function useImagePreview(
-  initialImageUrl: string,
-  newImageFile: File | undefined,
-) {
-  const [previewUrl, setPreviewUrl] = useState<string>(initialImageUrl);
+export function useImagePreview(initialImageUrl?: string, newImageFile?: File) {
+  const [previewUrl, setPreviewUrl] = useState<string | undefined>(
+    initialImageUrl,
+  );
 
   useEffect(() => {
     let objectUrl: string | null = null;
