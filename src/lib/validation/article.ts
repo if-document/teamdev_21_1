@@ -8,7 +8,7 @@ export const categorySchema = z.object({
 });
 
 const userSchema = z.object({
-  id: z.uuid(),
+  id: z.string(),
   name: z.string(),
   image_path: z.string().nullable(),
 });
