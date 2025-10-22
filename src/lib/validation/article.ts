@@ -21,7 +21,7 @@ export const articleFetchSchema = z.object({
   category: categorySchema.nullable(),
   image_path: z.string(),
   updated_at: z.string(),
-  user: userSchema.nullable(),
+  author: userSchema.nullable(),
 });
 
 // フロントエンドのArticle型に変換するZodスキーマ
@@ -29,9 +29,9 @@ export const articleDisplaySchema = articleFetchSchema.transform(
   (data): Article => {
     const categoryId = data.category?.id || 0;
     const categoryName = data.category?.name || "";
-    const authorId = data.user?.id || "";
-    const authorName = data.user?.name || "";
-    const authorAvatarUrl = data.user?.image_path || null;
+    const authorId = data.author?.id || "";
+    const authorName = data.author?.name || "";
+    const authorAvatarUrl = data.author?.image_path || null;
 
     return {
       id: data.id,
