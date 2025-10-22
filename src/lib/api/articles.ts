@@ -67,7 +67,7 @@ export async function getArticleForEdit(
     .from("posts")
     .select(`*,
     category:categories(id, name),
-    user:users(id,name, image_path)`)
+    author:users(id,name, image_path)`)
     .eq("id", articleId)
     .eq("user_id", userId)
     .single();
