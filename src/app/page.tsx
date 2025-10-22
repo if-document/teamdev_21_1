@@ -1,18 +1,46 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { ArticleList, type PostRecord } from "@/components/article/ArticleList";
 import { Pagination } from "@/components/pagination/Pagination";
 import { usePaginatedPosts } from "@/hooks/usePaginatedPosts";
-import { postsData } from "@/lib/sampleData";
 
-export default async function Home({
-  searchParams,
-}: {
-  searchParams?: Promise<{ page?: string }>;
-}) {
-  const params = await searchParams;
-  const currentPage = Number(params?.page) || 1;
+/**
+ * ISO形式日付文字列 書式変換
+ * @param isoString  ISO形式日付文字列
+ * @returns YYYY/MM/DD HH:MM 文字列
+ */
+const formatDate = (isoString: string): string => {
+  const date = new Date(isoString);
+  if (Number.isNaN(date.getTime())) return ""; // 無効日付を防止
+
+  return (
+    `${date.getFullYear()}/` +
+    `${String(date.getMonth() + 1).padStart(2, "0")}/` +
+    `${String(date.getDate()).padStart(2, "0")} ` +
+    `${String(date.getHours()).padStart(2, "0")}:` +
+    `${String(date.getMinutes()).padStart(2, "0")}`
+  );
+};
+
+export default function Home() {
+  const [articles, setArticles] = useState<PostRecord[]>([]);
+  // 取得された全記事データ
+  // ページを更新する際は PostRecord 型配列 articles
+  // から必要範囲の要素を、表示用配列に切り出して更新の際、参照する
+
+  useEffect(() => {
+    // 記事データをすべて取得する
+    ArticleList().then((data) => setArticles(data));
+  }, []);
+
+  // Page数 取得
+  const params = useSearchParams();
+  const currentPage = Number(params.get("page")) || 1;
   const { paginatedPosts, totalPages } = usePaginatedPosts(
-    postsData,
+    articles,
     currentPage,
     9,
   );
@@ -53,9 +81,10 @@ export default async function Home({
               {/* Image */}
               <div className="w-full h-[300px] relative">
                 <Image
-                  src={post.articleImageUrl}
-                  alt={`${post.title} Thumbnail`}
-                  fill
+                  src={post.image_path}
+                  alt={`${post.title} Thumb Nail`}
+                  width={500}
+                  height={500}
                   className="object-cover"
                 />
               </div>
@@ -65,12 +94,14 @@ export default async function Home({
                 <div className="flex justify-between items-center mb-[20px]">
                   <h3 className="text-[30px] font-bold">{post.title}</h3>
                   <span className="text-[#18A0FB] text-[18px]">
-                    {post.category.name}
+                    {post.categories.name}
                   </span>
                 </div>
                 <div className="flex items-center gap-x-[20px] mb-[10px] text-[16px]">
-                  <span className="text-[#18A0FB]">{post.author.name}</span>
-                  <span className="text-gray-400">{post.time}</span>
+                  <span className="text-[#18A0FB]">{post.users.name}</span>
+                  <span className="text-gray-400">
+                    {formatDate(post.created_at)}
+                  </span>
                 </div>
                 <p>{post.content}</p>
               </div>
