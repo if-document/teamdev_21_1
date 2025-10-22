@@ -22,7 +22,7 @@ import {
   getArticleForEdit,
   getCategories,
   updateArticle,
-} from "@/lib/api/article";
+} from "@/lib/api/articles";
 import type { ArticleUpdateData } from "@/lib/validation/article";
 import { articleUpdateSchema } from "@/lib/validation/article";
 import type { Article, Category } from "@/types/types";
