@@ -1,11 +1,8 @@
-import Image from "next/image";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
-import { Comment } from "@/lib/types";
+import ArticleCommentList from "../ArticleCommentList";
 
-export function CommentSection({ comments }: { comments: Comment[] }) {
+export function CommentSection() {
   return (
     <section className="p-4 max-w-[800px] mx-auto w-full">
       <h2 className="text-3xl font-semibold mb-6">Comments</h2>
@@ -19,40 +16,7 @@ export function CommentSection({ comments }: { comments: Comment[] }) {
           Comment
         </Button>
       </form>
-      <div className="space-y-8">
-        {comments.map((comment) => (
-          <Card
-            key={comment.id}
-            className=" bg-stone-100 rounded-md p-4 shadow-none border-none"
-          >
-            <div className="flex gap-6">
-              <div className="flex flex-col items-center">
-                <Avatar className="w-[74px] h-[74px]">
-                  <AvatarImage
-                    src={comment.userAvatarUrl ?? undefined}
-                    alt={comment.userName}
-                  />
-                  <AvatarFallback>
-                    <Image
-                      src="/images/defaultUserIcon.svg"
-                      alt="User"
-                      width={74}
-                      height={74}
-                    />
-                  </AvatarFallback>
-                </Avatar>
-                <p className="text-lg">{comment.userName}</p>
-              </div>
-              <div className="flex flex-col h-full">
-                <p className="text-lg leading-relaxed mt-2 mb-2">
-                  {comment.content}
-                </p>
-                <p className="text-sky-300 text-lg">{comment.time}</p>
-              </div>
-            </div>
-          </Card>
-        ))}
-      </div>
+      <ArticleCommentList />
     </section>
   );
 }
