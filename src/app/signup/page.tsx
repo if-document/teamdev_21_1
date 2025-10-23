@@ -11,13 +11,29 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/lib/supabaseClient";
+import { useState } from "react";
+import { redirect } from "next/navigation";
 
 export default function SignupPage() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const handleSignup = async () => {
     const { data, error } = await supabase.auth.signUp({
-      email: "example@email.com",
-      password: "example-password",
+      email: email,
+      password: password,
     });
+
+    if (data.user) {
+      await supabase.from("users").insert({
+        name: name,
+        id: data.user.id,
+        email: email,
+      })
+    }
+
+    redirect('/');
   };
 
   return (
@@ -45,6 +61,7 @@ export default function SignupPage() {
                              text-base sm:text-lg text-[#5B5B5B] placeholder:text-base sm:placeholder:text-lg
                              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#18A0FB]/40"
                   autoComplete="name"
+                  onChange={(e) => setName(e.target.value)}
                 />
               </div>
 
@@ -64,6 +81,7 @@ export default function SignupPage() {
                              text-base sm:text-lg text-[#5B5B5B] placeholder:text-base sm:placeholder:text-lg
                              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#18A0FB]/40"
                   autoComplete="email"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
 
@@ -83,6 +101,7 @@ export default function SignupPage() {
                              text-base sm:text-lg text-[#5B5B5B] placeholder:text-base sm:placeholder:text-lg
                              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#18A0FB]/40"
                   autoComplete="new-password"
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
             </CardContent>
