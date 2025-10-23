@@ -28,7 +28,7 @@ export default async function ArticlePage({
   return (
     <div className="min-h-screen bg-white flex flex-col pt-[60px] pb-[35px]">
       <ArticleSection article={article} />
-      <CommentSection comments={comments} />
+      <CommentSection comments={comments} postId={articleId} />
     </div>
   );
 }
