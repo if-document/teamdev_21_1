@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { notFound, useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { Controller, useForm } from "react-hook-form";
 import { ZodError } from "zod";
@@ -26,6 +26,7 @@ import {
 import type { ArticleUpdateData } from "@/lib/validation/article";
 import { articleUpdateSchema } from "@/lib/validation/article";
 import type { Article, Category } from "@/types/types";
+import { deletePost } from "@/lib/posts";
 
 export default function ArticleEditPage() {
   const params = useParams();
@@ -123,6 +124,30 @@ export default function ArticleEditPage() {
       }
     }
   };
+
+  const currentId = Number(params.id);
+  const handleDelete = useCallback(async () => {
+    console.log(`<Delete ${currentId}>`);
+
+    if (!currentId) {
+      console.log("Error: invalid ID.");
+      return;
+    }
+
+    if (!confirm("Delete current article ?")) {
+      console.log("Delete Canceled.");
+      return;
+    }
+
+    try {
+      await deletePost(currentId);
+      console.log("delete completed.");
+      router.push("/"); // ホームページへ復帰する
+    } catch (err) {
+      console.log("Error: invalid ID.");
+      console.error(err);
+    }
+  }, [currentId, router]);
 
   // ローディング中
   if (isLoading) {
@@ -249,13 +274,20 @@ export default function ArticleEditPage() {
           </p>
         )}
 
-        <div className="flex justify-center md:justify-end my-[2em]">
+        <div className="flex justify-center md:justify-end my-[2em] gap-[0.5em]">
           <Button
             type="submit"
             className="px-[4em] py-[1.3em] bg-[#18A0FB] text-[#fff] text-[clamp(16px,1.5vw,22px)] font-bold"
             disabled={isSubmitting}
           >
             {isSubmitting ? "Updating..." : "Update"}
+          </Button>
+          <Button
+            type="button"
+            onClick={handleDelete}
+            className="px-[4em] py-[1.3em] bg-[#18A0FB] text-[#fff] text-[clamp(16px,1.5vw,22px)] font-bold"
+          >
+            Delete
           </Button>
         </div>
       </form>
