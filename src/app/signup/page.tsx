@@ -15,10 +15,9 @@ import { supabase } from "@/lib/supabaseClient";
 export default function SignupPage() {
   const handleSignup = async () => {
     const { data, error } = await supabase.auth.signUp({
-      email: "example@email.com",
-      password: "example-password",
+      email: "***@***.***",
+      password: "**********",
     });
-  };
 
   return (
     <div className="min-h-screen bg-white flex flex-col font-sans">
