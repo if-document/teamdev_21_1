@@ -4,10 +4,10 @@ import { useState } from "react";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Comment } from "@/lib/types";
 import { supabase } from "@/lib/supabaseClient";
+import { Card } from "../ui/card";
 
 interface CommentSectionProps {
   comments: Comment[];

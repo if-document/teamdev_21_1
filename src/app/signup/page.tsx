@@ -1,15 +1,31 @@
+"use client";
+
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardHeader,
   CardContent,
   CardFooter,
+  CardHeader,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import Link from "next/link";
+import { supabase } from "@/lib/supabaseClient";
+import { useState } from "react";
+import { redirect } from "next/navigation";
 
 export default function SignupPage() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSignup = async () => {
+    const { data, error } = await supabase.auth.signUp({
+      email: "***@***.***",
+      password: "example2@example.com",
+    });
+
+
   return (
     <div className="min-h-screen bg-white flex flex-col font-sans">
       <main className="flex-1 flex justify-center">
@@ -35,6 +51,7 @@ export default function SignupPage() {
                              text-base sm:text-lg text-[#5B5B5B] placeholder:text-base sm:placeholder:text-lg
                              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#18A0FB]/40"
                   autoComplete="name"
+                  onChange={(e) => setName(e.target.value)}
                 />
               </div>
 
@@ -54,6 +71,7 @@ export default function SignupPage() {
                              text-base sm:text-lg text-[#5B5B5B] placeholder:text-base sm:placeholder:text-lg
                              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#18A0FB]/40"
                   autoComplete="email"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
 
@@ -73,6 +91,7 @@ export default function SignupPage() {
                              text-base sm:text-lg text-[#5B5B5B] placeholder:text-base sm:placeholder:text-lg
                              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#18A0FB]/40"
                   autoComplete="new-password"
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
             </CardContent>
@@ -81,6 +100,7 @@ export default function SignupPage() {
               <Button
                 type="button"
                 className="h-14 w-48 rounded-full bg-[#18A0FB] text-white text-lg font-semibold"
+                onClick={handleSignup}
               >
                 Sign Up
               </Button>
