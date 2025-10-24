@@ -117,7 +117,7 @@ export default function ProfilePage() {
                       {post.title}
                     </Link>
                     <span className="text-[#18A0FB] text-[18px]">
-                      {post.category}
+                      {post.category.name}
                     </span>
                   </div>
 

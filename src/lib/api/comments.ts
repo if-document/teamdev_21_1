@@ -1,6 +1,6 @@
 // src/lib/api/comments.ts
 import { supabase } from "@/lib/supabaseClient";
-import { Comment } from "@/lib/types";
+import type { Comment } from "@/types/types";
 
 export async function getCommentsByArticleId(
   articleId: number,

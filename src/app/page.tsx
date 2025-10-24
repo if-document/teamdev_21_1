@@ -26,7 +26,6 @@ const formatDate = (isoString: string): string => {
 };
 
 export default function Home() {
-
   const [articles, setArticles] = useState<PostRecord[]>([]);
   // 取得された全記事データ
   // ページを更新する際は PostRecord 型配列 articles
@@ -42,7 +41,8 @@ export default function Home() {
   const currentPage = Number(params.get("page")) || 1;
   const { paginatedPosts, totalPages } = usePaginatedPosts(
     articles,
-    currentPage, 9,
+    currentPage,
+    9,
   );
 
   return (
